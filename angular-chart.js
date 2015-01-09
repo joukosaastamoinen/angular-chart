@@ -23,6 +23,13 @@
 
         link: function (scope, element, attrs) {
 
+          // Quick and dirty resize listener leak fix
+          // TODO: Move this to a more appropriate
+          //       place in code and write tests.
+          element.on('$destroy', function() {
+            scope.chart.destroy();
+          });
+
           scope.options = scope.options ? scope.options : {};
 
           scope.chart = null;
